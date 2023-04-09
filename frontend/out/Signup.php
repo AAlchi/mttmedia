@@ -16,9 +16,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    function onSubmit(token) {
+      document.getElementById("signup-form").submit();
+    }
+  </script>
 </head>
 <body>
-    <form action="http://localhost/mttmedia/backend/signup.php" method="POST" class="main">
+    <form action="http://localhost/mttmedia/backend/signup.php" method="POST" id="signup-form" class="main">
         <h1 style="color: black" ><div>Sign Up For <span style="color: green; font-weight: bold">MTT Media</span></div></h1>
         <span style="color: red">Anything with a * is required</span>
         <div class="items">
@@ -36,16 +42,30 @@
 
             <label>Password<span style="color: red"> *</span></label>
             <input type="password" name="password" required/>
+            <div class="g-recaptcha" data-sitekey="6LdJHW8lAAAAAENKzGObi9oJ46hoWdW2QFwi7zbJ" data-callback="onSubmit" required></div>
+
+
         </div>
 
         <div class="item2">
             <span id="span"><?php echo $error; ?></span>
             <br></br>
-            <button type="submit" name="submitSignup">Sign Up</button>
+            <button onclick="submitForm()" type="submit" name="submitSignup" disabled>Sign Up</button>
             <h5>Have an account? <a href="http://localhost/mttmedia/frontend/out/signin.php">Sign In</a></h5>
         </div>
     </form>
+     <script>
+          function onSubmit(token) {
+      document.querySelector('button[type="submit"]').disabled = false;
+    }
+  </script>
     <style>
+
+        .g-recaptcha {
+      transform: scale(70%);
+      transform-origin: 0 0;
+      
+    }
         body {
             background-color: lightgray;
         }
@@ -91,7 +111,7 @@
             opacity: 80%;
         }
 
-        @media (max-height: 730px) {
+        @media (max-height: 900px) {
             .main {
                 top: 0;
                 margin-top: 5%;

@@ -5,6 +5,9 @@ include_once './database.php';
 $username = $_POST['username'];
 $password = $_POST['password'];
 
+if (isset($_POST['sign-in'])) {
+    
+
 $sql = "SELECT * FROM users WHERE username='$username';";
 $result = mysqli_query($conn, $sql);
 
@@ -29,5 +32,9 @@ if (mysqli_num_rows($result) > 0) {
     }
 } else {
     header("location: http://localhost/mttmedia/frontend/out/signin.php?error=usernameorpasswordwrong");
+    exit();
+}
+} else {
+     header("location: http://localhost/mttmedia/frontend/out/signin.php");
     exit();
 }

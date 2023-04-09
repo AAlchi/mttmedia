@@ -16,6 +16,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In</title>
+      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </head>
 <body>
     <form action="http://localhost/mttmedia/backend/signin.php" method="POST"  class="main">
@@ -27,16 +29,29 @@
 
             <label>Password</label>
             <input type="password" name="password" required/>
+                <div class="g-recaptcha" data-sitekey="6LdJHW8lAAAAAENKzGObi9oJ46hoWdW2QFwi7zbJ" data-callback="onSubmit" required></div>
+
         </div>
 
         <div class="item2">
             <span id="span"><?php echo $error;?></span>
             <br></br>
-            <button>Sign In</button>
+            <button type="submit" name="sign-in" disabled>Sign In</button>
             <h5>No Account? <a href="http://localhost/mttmedia/frontend/out/signup.php">Sign Up</a></h5>
         </div>
     </form>
+
+     <script>
+          function onSubmit(token) {
+      document.querySelector('button[type="submit"]').disabled = false;
+    }
+  </script>
     <style>
+.g-recaptcha {
+      transform: scale(70%);
+      transform-origin: 0 0;
+    }
+
         body {
             background-color: lightgray;
         }
@@ -82,7 +97,7 @@
             opacity: 80%;
         }
 
-        @media (max-height: 530px) {
+        @media (max-height: 600px) {
             .main {
                 top: 0;
                 margin-top: 5%;
